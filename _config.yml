@@ -1,5 +1,5 @@
-title: Architect theme
-description: Architect is a theme for GitHub Pages.
-show_downloads: true
+title: CodeAlchemy
+description: A developer’s guide covering data science, AI, programming, and essential tools like Git, VS Code, and more—curated for efficiency and growth.
+show_downloads: false
 google_analytics:
-theme: jekyll-theme-architect
+theme: jekyll-theme-tactile
