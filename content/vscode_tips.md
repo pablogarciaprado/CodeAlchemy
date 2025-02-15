@@ -1,4 +1,4 @@
-# VS Code Cheat Sheet
+# **VS Code Cheat Sheet**
 
 A collection of useful VS Code shortcuts to boost your productivity.
 
