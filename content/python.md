@@ -39,3 +39,16 @@ try:
 except Exception:
     print(traceback.format_exc())
 ```
+
+## `try-except` blocks
+
+```python
+try:
+    # Code that might raise an exception
+except SomeError:
+    # Handle the exception
+else:
+    # Runs only if no exception occurred
+finally:
+    # Always runs, whether an exception happened or not
+```

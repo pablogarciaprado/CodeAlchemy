@@ -6,6 +6,8 @@
 - [`~`](#~)
 - [`;`](#;)
 - [`cat`](#cat)
+- [Conditional Blocks](#conditional-blocks)
+- [Flags](#flags)
 - [`htop`](#htop)
 - [`kill`](#kill)
 - [`nano`](#nano)
@@ -72,6 +74,30 @@ cat file1.txt >> file2.txt
 cat -n filename.txt
 ```
 > *Displays filename.txt with line numbers.*
+
+## Conditional Blocks
+
+```bash
+if [[ -f myfile.txt ]]; then
+    echo "File exists"
+else
+    echo "File does not exist"
+fi  # End of if statement
+```
+
+- `if ...; then` → Starts the conditional block.
+- `else` (optional) → Specifies an alternative block.
+- `fi` → Closes the if statement. It's just "if" spelled backward—a common pattern in shell scripting.
+
+## Flags
+
+-d → Checks if it's a directory
+-e → Checks if the file exists (regardless of type)
+-f → Checks if the file exists and is a regular file (not a directory).
+-n → Checks if a string is not empty
+-r → Checks if the file is readable
+-w → Checks if the file is writable
+-x → Checks if the file is executable
 
 ## `htop`
 The htop command is an interactive process viewer for Unix-based systems. It allows users to monitor system resources (CPU, memory, etc.) and manage processes in real time, with features like sorting, filtering, and killing processes directly from the interface.

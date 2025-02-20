@@ -16,12 +16,8 @@
 
 - [Typical Workflow](#typical-workflow)
   - [1. Commit or stash your local changes](#1-commit-or-stash-your-local-changes)
-    - [Option 1: Commit your changes](#option-1-commit-your-changes)
-    - [Option 2: Stash your changes](#option-2-stash-your-changes)
   - [2. Fetch the latest changes](#2-fetch-the-latest-changes)
-  - [3. Merge or rebase the remote branch](#3-merge-or-rebase-the-remote-branch)
-    - [Option 1: Merge the changes](#option-1-merge-the-changes)
-    - [Option 2: Rebase](#option-2-rebase)
+  - [3.Synchronize with the remote branch](#3-synchronize-with-the-remote-branch)
 
 - [Branches](#branches)
   - [View both local and remote branches](#view-both-local-and-remote-branches)
@@ -113,7 +109,7 @@ git push -u origin main
 <br>
 
 # Typical Workflow
-## **1. Commit or stash your local changes (if any)**
+## **1. Commit or stash your local changes**
 ### **Option 1: Commit your changes**
 #### Stage your changes
 ```bash
@@ -137,20 +133,26 @@ git stash
 git fetch origin
 ```
 
-## **3. Merge or rebase the remote branch**
-You now have two options: merge or rebase. Both incorporate changes, but in different ways.
+## **3. Synchronize with the remote branch**
 
-### **Option 1: Merge the changes**
+### **Option 1: Push the changes to remote**
 #### Merge the remote branch into your local branch
 ```bash
-git merge origin/<updates/your_branch>
+git push origin <branch_name>
+```
+*Push your local commits to the remote repository.*
+
+### **Option 2: Merge the changes**
+#### Merge the remote branch into your local branch
+```bash
+git merge origin/<updates/branch_name>
 ```
 *This will merge your teammate's changes into your local branch and create a merge commit if there are new commits.*
 
-### **Option 2: Rebase (if you want a linear history)**
+### **Option 3: Rebase (if you want a linear history)**
 #### Rebase your branch to include your teammate's changes
 ```bash
-git checkout example-branch
+git checkout branch_name
 git rebase main
 ```
 *Rebase takes all the commits from example-branch that are not in main, temporarily removes them, updates feature-branch to match main, and then re-applies your commits on top of the updated main. This can help resolve commit issues, if remote and local are not in synchronization. During rebasing, if there are conflicts, Git will pause the process and you’ll need to resolve the conflicts manually.*
