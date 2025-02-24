@@ -71,7 +71,7 @@ With Cloud Run functions, previously known as Cloud Functions, you can develop a
 ![Cloud Run functions](cloud_run_functions.png)
 ![Cloud Run functions usecases](cloud_run_functions_usecases.png)
 
-In a serverless environment, the cloud provider automatically manages the infrastructure, scaling, and resource allocation. The application developer doesn’t need to worry about provisioning or maintaining servers.
+> In a serverless environment, the cloud provider automatically manages the infrastructure, scaling, and resource allocation. The application developer doesn’t need to worry about provisioning or maintaining servers.
 
 ### Comparisons
 
