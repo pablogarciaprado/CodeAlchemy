@@ -1,3 +1,5 @@
+◀️ [Home](../README.md)
+
 # Markdown Guide
 
 Markdown is a lightweight markup language that lets you format text easily. Here are some things that can be done in Markdown:

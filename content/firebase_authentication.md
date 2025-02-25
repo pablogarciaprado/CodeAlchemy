@@ -1,3 +1,5 @@
+◀️ [Home](../README.md)
+
 # Authentication and RBAC with Firebase
 
 How to add authentication and authorization (custom RBAC) to your application in Locaria.

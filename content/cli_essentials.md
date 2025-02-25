@@ -1,3 +1,5 @@
+◀️ [Home](../README.md)
+
 # **CLI Essentials**
 🛠 Text-based interface used to interact with a computer by entering commands. It provides direct access to system functions and scripting capabilities, often used for automation and troubleshooting.
 

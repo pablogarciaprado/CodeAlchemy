@@ -9,7 +9,14 @@ Feel free to explore the different sections and make use of the resources provid
 ## Table of Contents
 
 - [CLI Essentials](content/cli_essentials.md)
-- [git Cheat Sheet](content/git.md)
+- [Firebase: Authentication and RBAC](content/firebase_authentication.md)
+- [`git` Cheat Sheet](content/git.md)
+- [Google Cloud](content/google_cloud/)
+    - [Developing Applications](content/google_cloud/developing_applications/)
+        - [Deploying Applications](content/google_cloud/developing_applications/deploying_applications/deploying_applications.md)
+        - [Compute Options](content/google_cloud/developing_applications/compute_options/compute_options.md)
+        - [Monitoring](content/google_cloud/developing_applications/monitoring/monitoring_and_performance_tuning.md)
 - [Markdown Guide](content/markdown_guide.md)
 - [Python](content/python.md)
-- [Visual Studio Code Cheat Sheet](content/vscode_tips.md)
+- [Visual Studio Code Tips](content/vscode/vscode_tips.md)
+- [Z shell](content/zsh_configuration_file.md)

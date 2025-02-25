@@ -1,11 +1,14 @@
+◀️ [Home](../README.md)
+
 # `.zshrc` file
 
-The .zshrc file is the Zsh configuration file.
+Zsh (Z Shell) is an extended Unix shell that is compatible with Bash but offers additional features like better auto-completion, improved globbing, spelling correction, and powerful customization options. It is the default shell on macOS since Catalina.
 
-It runs every time a new interactive Zsh shell is started.
+> A Unix shell is a command-line interface that allows users to interact with the operating system by executing commands, running scripts, and managing files. It interprets user commands and provides features for scripting, automation, and system management. Common Unix shells include Bash, Zsh, and Sh.
+
+The `.zshrc` file is the Zsh configuration file. It runs every time a new interactive Zsh shell is started.
 
 It is used to:
-
 - Customize the shell prompt (PS1)
 - Set environment variables
 - Define aliases and functions
