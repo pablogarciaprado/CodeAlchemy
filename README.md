@@ -16,6 +16,8 @@ Feel free to explore the different sections and make use of the resources provid
         - [Deploying Applications](content/google_cloud/developing_applications/deploying_applications/deploying_applications.md)
         - [Compute Options](content/google_cloud/developing_applications/compute_options/compute_options.md)
         - [Monitoring](content/google_cloud/developing_applications/monitoring/monitoring_and_performance_tuning.md)
+    - [Tips](content/google_cloud/tips/)
+        - [Potential Issues](content/google_cloud/tips/potential_issues.md)
 - [Markdown Guide](content/markdown_guide.md)
 - [Python](content/python.md)
 - [Visual Studio Code Tips](content/vscode/vscode_tips.md)
