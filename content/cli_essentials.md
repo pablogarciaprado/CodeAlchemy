@@ -93,13 +93,34 @@ fi  # End of if statement
 
 ## Flags
 
--d → Checks if it's a directory
--e → Checks if the file exists (regardless of type)
--f → Checks if the file exists and is a regular file (not a directory).
--n → Checks if a string is not empty
--r → Checks if the file is readable
--w → Checks if the file is writable
--x → Checks if the file is executable
+- -d → Checks if it's a directory
+- -e → Checks if the file exists (regardless of type)
+- -f → Checks if the file exists and is a regular file (not a directory).
+- -n → Checks if a string is not empty
+- -r → Checks if the file is readable
+- -w → Checks if the file is writable
+- -x → Checks if the file is executable
+
+<br>
+
+- --user
+```bash
+pip3 install -r ~/bookshelf/requirements.txt --user
+```
+Installs the packages for the current user only instead of system-wide.
+
+Why use --user?
+
+    - Avoids needing admin/root privileges (no sudo required).
+    - Installs packages in ~/.local/ (Linux/macOS) or %APPDATA%\Python (Windows).
+    - Prevents conflicts with system Python packages.
+
+When to use it?
+
+    - When you don’t have admin rights.
+    - When you want to keep system Python clean.
+    - If using a single-user setup without a virtual environment.
+> Using virtual environments (venv or conda) is usually preferred over --user for better package management.
 
 ## `htop`
 The htop command is an interactive process viewer for Unix-based systems. It allows users to monitor system resources (CPU, memory, etc.) and manage processes in real time, with features like sorting, filtering, and killing processes directly from the interface.
