@@ -12,6 +12,7 @@
 - [Flags](#flags)
 - [`htop`](#htop)
 - [`kill`](#kill)
+- [`mv`](#mv)
 - [`nano`](#nano)
 - [`ping`](#ping)
 
@@ -153,6 +154,22 @@ pablogarcia       2405   0.0  0.0 410063504    528 s014  R+    1:29PM   0:00.00 
 kill -9 468 455
 ```
 > *To stop the Python script, we want to terminate the processes with PIDs 468 and 455 (related to app.py)*
+
+## `mv`
+The `mv` command in Unix/Linux is used to move or rename files and directories.
+
+Move a file:
+```bash
+mv file.txt /path/to/destination/
+```
+Rename a file:
+```bash
+mv oldname.txt newname.txt
+```
+Move and rename at the same time:
+```bash
+mv file.txt /new/path/newname.txt
+```
 
 ## `nano`
 The `nano` command is used to open the Nano text editor, a simple and user-friendly command-line text editor available on Unix-based systems like Linux and macOS.
