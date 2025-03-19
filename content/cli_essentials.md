@@ -7,11 +7,15 @@
 
 - [`~`](#~)
 - [`;`](#;)
+- [`${...}`](#${...})
 - [`cat`](#cat)
 - [Conditional Blocks](#conditional-blocks)
+- [`cp`](#cp)
+- [`export`](#export)
 - [Flags](#flags)
 - [`htop`](#htop)
 - [`kill`](#kill)
+- [`ln`](#ln)
 - [`mv`](#mv)
 - [`nano`](#nano)
 - [`ping`](#ping)
@@ -34,6 +38,16 @@ cd ~/bookshelf; ~/.local/bin/gunicorn -b :8080 main:app
 - `cd ~/bookshelf` → Changes the directory to bookshelf
 - `;` → Separates the two commands
 - `~/.local/bin/gunicorn -b :8080 main:app` → Runs the Gunicorn server
+
+## `${...}`
+This syntax is used for referencing a shell variable.
+```bash
+WORKFLOW_TRIGGER_SA="my-service-account@project.iam.gserviceaccount.com"
+echo ${WORKFLOW_TRIGGER_SA}
+# Output: my-service-account@project.iam.gserviceaccount.com
+```
+- If WORKFLOW_TRIGGER_SA is set, the shell will replace ${WORKFLOW_TRIGGER_SA} with its value.
+- If it's not set, it will return an empty string (unless a default value is specified using ${VAR:-default} syntax).
 
 ## `cat`
 The `cat` command in Unix-based systems (like macOS and Linux) is used to concatenate and display the contents of files. It is mostly used to quickly view or combine files.
@@ -91,6 +105,42 @@ fi  # End of if statement
 - `if ...; then` → Starts the conditional block.
 - `else` (optional) → Specifies an alternative block.
 - `fi` → Closes the if statement. It's just "if" spelled backward—a common pattern in shell scripting.
+
+## `cp`
+The `cp` (copy) command in Unix-like systems is used to copy files and directories. The syntax varies slightly depending on whether you're using it for local files (`cp`) or cloud storage (gcloud storage `cp`).
+
+### Local File Copy
+```bash
+cp [options] source destination
+```
+
+#### Examples
+
+Copy a file:
+```bash
+cp file1.txt file2.txt  # Copies file1.txt to file2.txt
+```
+Copy a file to a directory:
+```bash
+cp file1.txt ~/Documents/  # Copies file1.txt into Documents
+```
+Copy a directory (recursively):
+```bash
+cp -r my_folder backup_folder  # Copies my_folder and its contents
+```
+Common Options:
+- -r → Recursive (used for directories)
+- -v → Verbose (shows progress)
+- -i → Interactive (asks before overwriting)
+- -u → Updates only if the source is newer
+
+## `export`
+
+Makes the variable available to child processes (subprocesses) started from that shell session.
+```bash
+export IMAGE_NAME=neon.jpg
+```
+Defines IMAGE_NAME as neon.jpg, which is the filename of the image being uploaded.
 
 ## Flags
 
@@ -154,6 +204,33 @@ pablogarcia       2405   0.0  0.0 410063504    528 s014  R+    1:29PM   0:00.00 
 kill -9 468 455
 ```
 > *To stop the Python script, we want to terminate the processes with PIDs 468 and 455 (related to app.py)*
+
+## `ln`
+Creates links between files or directories.
+- Soft links act like shortcuts; they depend on the original file.
+- Hard links are alternative names for the same data and remain functional even if the original file is deleted.
+
+| Feature                         | **Soft Link (Symbolic Link)**          | **Hard Link**                           |
+|---------------------------------|--------------------------------|--------------------------------|
+| **Definition**                  | A pointer to the original file. | A duplicate reference to the same file data on disk. |
+| **Inode** `[^1]`          | Has a different inode number than the original file. | Shares the same inode as the original file. |
+| **Works Across Filesystems?**    | Yes, can link to a file on a different filesystem. | No, must be on the same filesystem. |
+| **Works for Directories?**       | Yes, can link to directories. | No, hard links cannot be created for directories. |
+| **If Original File is Deleted?** | The soft link breaks (becomes useless). | The hard link still works because the file data remains. |
+| **Command to Create**            | `ln -s target link_name` | `ln target link_name` |
+
+`[^1]`: An inode (index node) is a data structure used by Unix-like file systems to store metadata about a file. It contains information such as: File size, File type (regular file, directory, etc.), Permissions (read, write, execute), Owner and group ID, Timestamps (creation, modification, access), Pointers to data blocks (where the file's actual content is stored). Each file has a unique inode number, except hard links, which share the same inode. Soft (symbolic) links, however, have different inodes. To check a file's inode number, use: `ls -i filename`.
+
+> *What is the difference between a hard link and copying the file?* <br>
+> A hard link is just another name for the same file, pointing to the same data on disk. A copied file is a completely independent version, taking up extra space.
+
+The following command creates a symbolic link (~/code) that points to ~/training-data-analyst/courses/orchestration-and-choreography/lab1. After running this command, instead of navigating to the full path, you can just use ~/code to access the same location.
+```bash
+ln -s ~/training-data-analyst/courses/orchestration-and-choreography/lab1 ~/code
+```
+- `-s` → Creates a symbolic link (soft link) instead of a hard link.
+- `~/training-data-analyst/courses/orchestration-and-choreography/lab1` → The target directory you want to link to.
+- `~/code` → The name/location of the symbolic link being created.
 
 ## `mv`
 The `mv` command in Unix/Linux is used to move or rename files and directories.
