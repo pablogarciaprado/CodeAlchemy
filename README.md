@@ -20,6 +20,8 @@ Feel free to explore the different sections and make use of the resources provid
         - [Microservices](content/google_cloud/service_orchestration_and_choreography/microservices/microservices.md)
         - [Event-driven Applications](content/google_cloud/service_orchestration_and_choreography/event-driven_applications/event-driven_applications.md)
         - [Choreography & Orchestration](content/google_cloud/service_orchestration_and_choreography/choreography_and_orchestration/choreography_and_orchestration.md)
+    - [Developing Applications with Cloud Run Functions](content/google_cloud/developing_applications_with_cloud_run_functions/)
+        - [Introduction](content/google_cloud/developing_applications_with_cloud_run_functions/introduction/introduction.md)
     - [Tips](content/google_cloud/tips/)
         - [Commands](content/google_cloud/tips/commands.md)
         - [Concepts](content/google_cloud/tips/concepts.md)
