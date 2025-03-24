@@ -8,17 +8,23 @@
 - [`~`](#~)
 - [`;`](#;)
 - [`${...}`](#${...})
+- [`&&`](#&&)
+- [`$_`](#$_)
 - [`cat`](#cat)
 - [Conditional Blocks](#conditional-blocks)
 - [`cp`](#cp)
+- [`curl`](#cp)
 - [`export`](#export)
 - [Flags](#flags)
 - [`htop`](#htop)
 - [`kill`](#kill)
 - [`ln`](#ln)
+- [`mkdir`](#mkdir)
 - [`mv`](#mv)
 - [`nano`](#nano)
 - [`ping`](#ping)
+- [`touch`](#touch)
+- [`unzip`](#unzip)
 
 ## `~`
 The `~` (tilde) represents the home directory of the current user in Unix-based systems like macOS and Linux.
@@ -48,6 +54,21 @@ echo ${WORKFLOW_TRIGGER_SA}
 ```
 - If WORKFLOW_TRIGGER_SA is set, the shell will replace ${WORKFLOW_TRIGGER_SA} with its value.
 - If it's not set, it will return an empty string (unless a default value is specified using ${VAR:-default} syntax).
+
+## `&&` (Logical AND operator)
+`&&` is a logical AND operator in Bash that runs the second command only if the first command succeeds.
+
+```bash
+mkdir my_folder && cd my_folder  
+```
+Creates `my_folder` and changes into it only if `mkdir` succeeds.
+
+## `$_`
+`$_` is a special variable in Bash that holds the last argument of the previous command.
+```bash
+mkdir my_folder && cd $_
+```
+`$_` expands to `my_folder`, so this is equivalent to `cd my_folder`.
 
 ## `cat`
 The `cat` command in Unix-based systems (like macOS and Linux) is used to concatenate and display the contents of files. It is mostly used to quickly view or combine files.
@@ -133,6 +154,60 @@ Common Options:
 - -v → Verbose (shows progress)
 - -i → Interactive (asks before overwriting)
 - -u → Updates only if the source is newer
+
+## `curl`
+The `curl` command is a command-line tool used to transfer data to or from a server using various network protocols, including HTTP, HTTPS, FTP, and others. It stands for **Client URL** and is commonly used for interacting with APIs, downloading or uploading files, and testing network connections.
+
+### Common Use Cases
+1. Fetch a webpage or file:
+
+```bash
+curl http://example.com
+```
+This will retrieve the content of `http://example.com`.
+
+2. Download a file:
+
+```bash
+curl -O https://example.com/file.zip
+```
+This downloads a file and saves it with the same name as on the server (`file.zip`).
+
+3. Send data with POST request:
+
+```bash
+curl -X POST -d "name=John&age=30" http://example.com/api
+```
+Sends a POST request with form data (`name=John&age=30`).
+
+4. Include headers in the request:
+
+```bash
+curl -H "Authorization: Bearer YOUR_TOKEN" http://example.com/api
+```
+Sends an HTTP request with a custom header (e.g., an Authorization token).
+
+5. Save the output to a file:
+
+```bash
+curl -o filename.txt http://example.com
+```
+This downloads content from the URL and saves it as `filename.txt`.
+
+6. Show only the HTTP response headers:
+
+```bash
+curl -I http://example.com
+```
+This fetches only the HTTP headers (e.g., status code, content type) without the body.
+
+### Key Options:
+- `-X` : Specifies the HTTP method (e.g., GET, POST, PUT).
+- `-d` : Sends data with a POST request.
+- `-O` : Downloads a file and saves it with its original filename.
+- `-H` : Adds custom headers to the request.
+- `-I` : Fetches the response headers only.
+- `-o` : Saves the output to a file.
 
 ## `export`
 
@@ -232,6 +307,17 @@ ln -s ~/training-data-analyst/courses/orchestration-and-choreography/lab1 ~/code
 - `~/training-data-analyst/courses/orchestration-and-choreography/lab1` → The target directory you want to link to.
 - `~/code` → The name/location of the symbolic link being created.
 
+## `mkdir` (Make Directory)
+Command used to create new directories (folders) in a filesystem.
+
+```bash
+mkdir my_folder  # Creates a directory named "my_folder"
+```
+Use -p to create parent directories if they don’t exist:
+```bash
+mkdir -p parent/child  # Creates "parent" and "child" inside it if they don't exist
+```
+
 ## `mv`
 The `mv` command in Unix/Linux is used to move or rename files and directories.
 
@@ -290,3 +376,19 @@ ping -c 5 google.com
 > - Reply from [IP address]: The destination is reachable.
 > - time: Round-trip time in milliseconds (ms).
 > - TTL (Time to Live): Number of hops the packet made.
+
+## `touch`
+Creates an empty file or updates the timestamp of an existing file.
+
+```bash
+touch file.txt
+```
+Creates `file.txt` if it doesn’t exist or updates its last modified time if it does.
+
+## `unzip`
+Extracts files from a `.zip` archive.
+
+```bash
+unzip archive.zip
+```
+Extracts `archive.zip` contents into the current directory.
