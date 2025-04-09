@@ -36,3 +36,38 @@ gcloud storage cp ~/code/images/${IMAGE_NAME} gs://${UPLOAD_BUCKET}
 **Common Options:**
 - --recursive → Copies directories and their contents
 - --preserve-posix → Preserves file permissions
+
+### Deploy on App Engine
+
+Run `gcloud app deploy` on the repository directory. Make sure to have a YAML configuration file within the folder.
+
+For example, you could navigate the appropriate folder and pull the latest changes:
+```bash
+cd github_repos/<your_repo>
+git switch main
+git fetch origin
+git pull
+```
+
+Then, deploy:
+```bash
+gcloud app deploy
+```
+
+A YAML file example:
+```yaml
+runtime: python39
+
+entrypoint: gunicorn -b :$PORT app:app
+
+handlers:
+- url: /static
+  static_dir: static
+  http_headers:
+    Cache-Control: "no-cache, no-store, must-revalidate"
+    Pragma: "no-cache"
+    Expires: "0"
+
+- url: /.*
+  script: auto
+```
