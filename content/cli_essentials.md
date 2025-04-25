@@ -13,7 +13,7 @@
 - [`cat`](#cat)
 - [Conditional Blocks](#conditional-blocks)
 - [`cp`](#cp)
-- [`curl`](#cp)
+- [`curl`](#curl)
 - [`export`](#export)
 - [Flags](#flags)
 - [`htop`](#htop)
