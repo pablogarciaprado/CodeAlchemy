@@ -71,3 +71,47 @@ handlers:
 - url: /.*
   script: auto
 ```
+
+### Tail logs from a Google App Engine service
+This script helps to quickly stream logs from the latest deployed App Engine version in the `default` service of the `your-project-name` project. Very useful for debugging and monitoring new deployments.
+
+1. Set the active GCP project:
+```bash
+gcloud config set project your-project-name
+```
+Sets the current project in your `gcloud` configuration to `your-project-name`, so subsequent commands are run against this project.
+
+2. Get the latest version ID:
+```bash
+LATEST_VERSION=$(gcloud app versions list \
+  --service default \
+  --sort-by "~version.id" \
+  --limit 1 \
+  --format "value(version.id)")
+```
+
+This block:
+- Lists versions of the App Engine `default` service
+- Sorts them in descending order by version ID (`~version.id`)
+- Limits to just the most recent one (`--limit 1`)
+- Extracts only the version ID (`--format "value(version.id)"`)
+- Saves the result to the shell variable `LATEST_VERSION`
+
+3. Print the latest version ID:
+```bash
+echo "Latest version: $LATEST_VERSION"
+```
+This line prints out which version was found, for clarity or debugging.
+
+4. Tail logs from the latest version:
+```bash
+gcloud app logs tail \
+  --service default \
+  --version $LATEST_VERSION
+```
+Tails (continuously streams) logs for the most recent version of the `default` App Engine service.
+
+To stop the gcloud app logs tail command from tailing logs, simply press:
+```bash
+Ctrl + C
+````
