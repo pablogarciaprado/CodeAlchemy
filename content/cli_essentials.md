@@ -14,6 +14,7 @@
 - [Conditional Blocks](#conditional-blocks)
 - [`cp`](#cp)
 - [`curl`](#curl)
+- [`echo`](#echo)
 - [`export`](#export)
 - [Flags](#flags)
 - [`htop`](#htop)
@@ -208,6 +209,20 @@ This fetches only the HTTP headers (e.g., status code, content type) without the
 - `-H` : Adds custom headers to the request.
 - `-I` : Fetches the response headers only.
 - `-o` : Saves the output to a file.
+
+## `echo`
+The `echo` command prints text to the terminal or outputs it to a file. It's commonly used to display messages or write text into files.
+
+```bash
+echo "Hello, world"       # prints "Hello, world" to the terminal
+echo "export VAR=value" >> ~/.bashrc   # appends the line to the end of the ~/.bashrc file
+```
+
+The `>>` operator in `echo` commands is used to append text to a file.
+- `echo '...'`: This prints the string inside the quotes.
+- `>> ~/.bashrc`: This appends the output of the `echo` command to the end of the `~/.bashrc` file, which is your Bash shell’s configuration file.
+
+> If you used a single `>` instead of `>>`, it would overwrite the entire file — which is typically not what you want when modifying config files.
 
 ## `export`
 
