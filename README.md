@@ -25,6 +25,7 @@ Feel free to explore the different sections and make use of the resources provid
         - [Calling and Connecting Cloud Run Functions](content/google_cloud/developing_applications_with_cloud_run_functions/calling_and_connecting_cloud_run_functions/calling_and_connecting_cloud_run_functions.md)
         - [Securing Cloud Run Functions](content/google_cloud/developing_applications_with_cloud_run_functions/securing_cloud_run_functions/securing_cloud_run_functions.md)
         - [Integrating with Cloud Databases](content/google_cloud/developing_applications_with_cloud_run_functions/integrating_with_cloud_databases/integrating_with_cloud_databases.md)
+        - [Best Practices for Functions](content/google_cloud/developing_applications_with_cloud_run_functions/best_practices_for_functions/best_practices_for_functions.md)
     - [Tips](content/google_cloud/tips/)
         - [Commands](content/google_cloud/tips/commands.md)
         - [Concepts](content/google_cloud/tips/concepts.md)
