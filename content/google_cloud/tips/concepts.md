@@ -22,6 +22,16 @@ In a nutshell:
 > Ultimately, the best choice depends on your specific application requirements, technical expertise, and desired level of control.
 
 ### Definitions
+#### Compile
+Refers to the process of transforming the human-readable Go source code and its dependencies into a machine-readable binary executable. For example, when building an application in Go, you install dependencies and compile them together with the source code to a binary. You can also choose to embed the assets into the binary. The Go compiler takes your source code and dependencies and converts them into a single binary file (an executable), which can run directly on your operating system without needing the Go toolchain at runtime.
+
+![Go application](image.png)
+
+#### Runtime
+In programming, a runtime (or runtime environment) refers to the software and system resources needed to execute a program after it has been written and possibly compiled. Without the appropriate runtime, a program in a language like Python, Java, or JavaScript can't run.
+
+For example, Python code isn't compiled into a standalone binary like in Go or C. Instead, it requires the Python interpreter (which is the runtime) to be installed on the system. This interpreter reads and executes the Python code line-by-line at runtime. In contrast, languages like Go or C compile directly into a native binary, which includes everything it needs to run. Once compiled, they don’t need a separate runtime environment.
+
 #### Serverless Computing
 Serverless computing on Google Cloud lets you develop and deploy highly scalable applications on a fully managed serverless platform. Services are automatically scaled up and down depending on traffic.
 
