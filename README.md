@@ -9,8 +9,11 @@ Feel free to explore the different sections and make use of the resources provid
 ## Table of Contents
 
 - [CLI Essentials](content/cli_essentials.md)
+- [Concepts Glossary](content/concepts_glossary.md)
+- [CSS](content/css.md)
 - [Firebase: Authentication and RBAC](content/firebase_authentication.md)
 - [`git` Cheat Sheet](content/git.md)
+- [GitHub](content/github.md)
 - [Google Cloud](content/google_cloud/)
     - [Developing Applications](content/google_cloud/developing_applications/)
         - [Deploying Applications](content/google_cloud/developing_applications/deploying_applications/deploying_applications.md)
@@ -33,7 +36,10 @@ Feel free to explore the different sections and make use of the resources provid
         - [Commands](content/google_cloud/tips/commands.md)
         - [Concepts](content/google_cloud/tips/concepts.md)
         - [Potential Issues](content/google_cloud/tips/potential_issues.md)
+- [HTML](content/html.md)
+- [JavaScript](content/javascript.md)
 - [Markdown Guide](content/markdown_guide.md)
 - [Python](content/python.md)
+- [Virtual Environments](content/virtual_environments.md)
 - [Visual Studio Code Tips](content/vscode/vscode_tips.md)
 - [Z shell](content/zsh_configuration_file.md)
