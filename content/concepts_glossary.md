@@ -159,3 +159,12 @@ class TestMathFunctions(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 ```
+
+## Webhook
+A webhook is a way for one system to automatically send real-time data to another system when a specific event happens. It's like a reverse API call: instead of your app asking for data, the webhook pushes the data to your app.
+
+1. You provide a URL (your webhook endpoint).
+2. Another service is set up to send data (usually via an HTTP POST request) to that URL when a certain event occurs.
+3. Your server receives and processes the data instantly.
+
+> Real-World Analogy: Imagine you place an order at a coffee shop and give them your phone number. Instead of waiting around, they text you when your drink is ready. That text is the webhook: it's sent when the "drink is ready" event happens.

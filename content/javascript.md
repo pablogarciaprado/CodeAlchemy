@@ -4,6 +4,21 @@
 
 High-level, versatile programming language primarily used for building interactive and dynamic content on websites. It runs in the browser and supports event handling, DOM manipulation, and APIs, while also being widely used for server-side development with platforms like Node.js.
 
+
+## Operators
+### `...`
+The `...` is called the spread operator in JavaScript. It's used to create a shallow copy of a structure, such as an array or an object.
+
+Without spread operator (creates a reference):
+```js
+this.originalData = data; // Both variables point to the same array in memory
+```
+
+With spread operator (creates a copy):
+```js
+this.originalData = [...data]; // Creates a new array with copied values
+```
+
 ## Arrow Functions
 
 Provide a shorter syntax compared to regular functions, and they also have some important differences in behavior, particularly with how they handle the `this` keyword. The `=>` syntax in JavaScript is used to define **arrow functions**.
