@@ -100,3 +100,99 @@ In summary:
 - Use Cloud Run for applications that serve web requests, including microservices, event processing workflows, and scheduled tasks or jobs.
 - Automatic scaling, incremental application updates, and built-in load balancing help you build highly available applications.
 - Cloud Run is designed to make developers more productive.
+
+### Google Kubernetes Engine
+Google Kubernetes Engine (GKE) is a fully managed Kubernetes service. Kubernetes is an open source container orchestration system for automating software deployment, scaling, and management. Originally designed by Google, the project is now maintained by the Cloud Native Computing Foundation (CNCF).
+
+Google Kubernetes Engine provides a managed environment for deploying, managing, and scaling your containerized applications on Google infrastructure. The GKE environment consists of multiple machines or nodes (specifically, Compute Engine instances) that are grouped together to form a cluster.
+
+There is a lot of work that goes into managing a container orchestration system like Kubernetes, from installation and provisioning to upgrades, scaling and meeting service level agreements (SLAs). With Google Kubernetes Engine, you gain the benefit of advanced cluster management features that include:
+- Easy cluster creation and management.
+- Load balancing.
+- Automatic scaling.
+- Automatic upgrades of your cluster node software.
+- Automatic repair to maintain node health and availability.
+- Logging and monitoring with Google Cloud’s operations suite for clustervisibility
+
+#### Control Plane
+A GKE cluster consists of one or more control planes and worker machines called nodes. The control plane and nodes make up the Kubernetes cluster orchestration system. GKE manages the entire underlying infrastructure of clusters, including the control plane, nodes, and all system components. The control plane manages everything that runs on all of the cluster's nodes. The control plane schedules container workloads and manages the workloads' lifecycle, scaling, and upgrades. The control plane also manages network and storage resources for those workloads. The control plane and nodes communicate with each other using Kubernetes APIs. The control plane is the unified endpoint for your cluster and runs the Kubernetes API server process (kube-apiserver) to handle API requests. To interact with the control plane, you make Kubernetes API calls using:
+- HTTP/gRPC requests.
+- Command-line clients such as kubectl, or the Google Cloud console.
+The API server process is the hub for all communication for the cluster. All internal cluster components such as nodes, system processes, and application controllers act as clients of the API server.
+
+#### Nodes
+Nodes are Compute Engine virtual machines (VMs) that run your containerized applications and other workloads. A node runs the services necessary to support the containers that make up your cluster's workloads. These include the runtime and the Kubernetes node agent (kubelet), which communicates with the control plane, and is responsible for starting and running containers that are scheduled on the node. A pod is the smallest deployable compute unit that you can create and manage in Kubernetes. A pod is a group of one or more containers with shared storage and network resources and a specification for how to run the containers. Pods are not usually created directly, but instead are created using Kubernetes workload resources such as Deployments or Jobs. Pods are ephemeral, disposable entities. When a Pod is created, it’s scheduled to run on a node in the cluster. The Pod remains on that node until it finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.
+
+#### Kubernetes Deployment
+With Kubernetes, you make API requests to specify the desired state for the objects in your cluster. Kubernetes attempts to constantly maintain that state. Kubernetes lets you configure objects in the API either imperatively or declaratively. A Deployment is a declarative way to create and manage pods in Kubernetes. It defines a ReplicaSet that specifies the desired number of pod replicas needed. The purpose of a ReplicaSet is to maintain a stable set of replica pods running at any given time. The Deployment Controller in Kubernetes changes the actual state of the deployment to the desired state at a controlled rate. A deployment is defined using a YAML file that specifies the desired number of pods and a selector label that identifies the pods to be included in the deployment. It also includes a specification that identifies the containers that will run in the pod. The example Deployment manages 4 pod replicas with the role label set to “web.”
+
+#### Kubernetes Service
+In Kubernetes, a service is a network abstraction that defines a logical set of pods and a policy by which to access them. The set of pods targeted by a service is usually determined by a selector. A service has a fixed IP address that lasts for the life of the service, even as the IP addresses of it’s member pods change. Because a pod is ephemeral, its IP address changes as it is deleted and re-created. Therefore it doesn't make sense to use Pod IP addresses directly. Clients call the service IP address instead, and their requests are load-balanced across the pods that are members of the service.
+
+#### Kubernetes Service manifest
+Like other Kubernetes resources, a service is defined in a manifest file in yaml format.
+
+![Kubernetes Service manifest](image-4.png)
+
+#### Kubernetes Volume
+A Kubernetes Volume is a directory that is accessible to all of the containers in a pod. To use a volume, a pod specifies what volumes to provide for the pod and where to mount those into containers. After the volume is mounted, the containers in the pod are brought online and the rest of pod initialization is completed. There are many different types of volumes in Kubernetes. ConfigMaps and Secrets, are types of volumes that are coupled to the life of the pod and cease to exist when the pod ceases to exist. Alternatively, a PersistentVolume has a lifecycle of its own, independent of the pod.
+
+#### Developing applications for GKE
+Now that you have some knowledge of what Kubernetes and GKE is, let’s discuss how you can develop and run your applications on Google Kubernetes Engine. We start with developing your application code. You can use any source code editor or IDE for this, but to make the development process more efficient, you should consider using tools that let you validate your code changes in the developer workspace. Cloud Code is a set of IDE plugins for popular IDEs that make it easier to create, deploy, and integrate applications with Google Cloud. Cloud Code has built-in capabilities such as Kubernetes and Cloud Run explorers which enable you to visualize, and monitor your cluster resources. With Code Repository, Cloud Build, and Container or Artifact Registry, and other Google Cloud tools such as Google Cloud Deploy and Skaffold, you can set up a continuous integration and continuous delivery pipeline that deploys your application to Google Kubernetes Engine. Using the kubectl CLI, you can manage your Kubernetes cluster resources and application workloads.
+
+![Developing applications for GKE](image-5.png)
+
+#### Development and deployment workflow
+Using Google Cloud tools, your development and deployment workflow would involve these steps:
+1. Use Cloud Code or other editors to create your application source, and store your code in a source code repository such as Cloud Source Repositories, GitHub, or other.
+2. Build your application using Cloud Build. Cloud Build lets you set up a CI pipeline that can be triggered from a commit to your source code repository. When a change is committed to the source repository, Cloud Build:
+- Rebuilds the application container image.
+- Stores the image in Artifact Registry.
+- Stores any build artifacts in a Cloud Storage bucket.
+- Run tests on the container.
+- Calls Google Cloud Deploy to deploy the container to a staging environment which contains a GKE cluster.
+3. If the build and tests are successful, use Cloud Deploy to promote the container to a production environment after approval.
+4. Manage your application on GKE.
+5. Monitor the performance of your application with Google Cloud's operations suite that includes integrated monitoring and logging for your application.
+
+![Development and deployment workflow](image-6.png)
+
+#### Summary
+In summary:
+- Google Kubernetes Engine is a fully managed Kubernetes service that provides a managed environment for deploying, managing, and scaling your containerized applications on Google infrastructure.
+- A GKE cluster consists of one or more control planes and worker machines called nodes. A zonal cluster has a single control plane running in one zone, while a regional cluster has multiple replicas of the control plane, running in multiple zones within a given region.
+- The control plane schedules container workloads and manages the workloads' lifecycle, scaling, upgrades, network, and storage resources.
+- A pod is a group of one or more containers, and is the smallest deployable compute unit that you can create and manage in Kubernetes.
+- In Kubernetes, you configure various kinds of objects in the API either imperatively or declaratively.
+
+### Container-Optimized OS
+In addition to Cloud Run and Google Kubernetes Engine, Google Cloud offers Container-Optimized OS, an operating system that you can use to run containerized applications. Container-Optimized OS is an image for Compute Engine VMs that is optimized for running Docker containers. Container-Optimized OS is maintained by Google and is based on the open source Chromium OS project. With Container-Optimized OS, you can start your Docker containers on Google Cloud quickly, and run them efficiently, and securely.
+
+Here are some features and benefits of Container-Optimized OS:
+- Run containers out of the box: Container-Optimized OS instances come pre-installed with the Docker runtime and cloud-init. With a Container-Optimized OS instance, you can bring up your Docker container at the same time you create your VM, with no on-host setup required.
+- Smaller attack surface: Container-Optimized OS has a smaller footprint, reducing your instance's potential attack surface.
+- Locked-down by default: Container-Optimized OS instances include a locked-down firewall and other security settings by default.
+- Automatic Updates: Container-Optimized OS instances are configured to automatically download weekly updates in the background; only a reboot is necessary to use the latest updates.
+
+There are also some limitations of Container-Optimized OS:
+- A package manager is not included, so you'll be unable to install software packages directly on an instance. However, you can use CoreOS toolbox to install and run debugging and admin tools in an isolated container.
+- Container-Optimized OS does not support execution of non-containerized applications.
+- The Container-Optimized OS kernel is locked down, so you'll be unable to install third-party kernel modules or drivers.
+- Container-Optimized OS is not supported outside of the Google Cloud environment.
+
+You should consider using Container-Optimized OS as the operating system for your Compute Engine instance if:
+- You need to run Docker containers with minimal setup.
+- You need a secure operating system with a small footprint to run containers.
+- You need to run Kubernetes on your Compute Engine instances. Container-Optimized OS may not be the right choice if:
+- Your application is not containerized, or your containerized application depends on kernel modules, drivers, and other additional packages that are not available in Container-Optimized OS.
+- You want your image and application to be fully supported on platforms other than Google Cloud. Compute Engine provides images for other popular operating systems, including images that are optimized for containers.
+
+### GKE or Cloud Run ?
+Let’s briefly discuss how you can choose to use Google Kubernetes Engine or Cloud Run.
+To take advantage of the rich ecosystem of tooling and third party vendors around Kubernetes, you should consider adopting GKE. GKE offers advanced scalability and configuration, and keeps you in control over all aspects of your container orchestration including networking, storage, logging and monitoring. GKE also supports stateful use cases of your application.
+
+If you don’t need this level of control, and you want to deploy your services without worrying about managing clusters, while keeping developer productivity a top priority, you should pick Cloud Run. Cloud Run is a scalable, serverless platform for stateless containerized applications and microservices. Since it deploys and run containers, you can develop your code in any language, and use tools and frameworks to build your application into container images that can be deployed on Cloud Run. 
+
+> Cloud Run and GKE work well together. You can always change course later with limited effort.
+
+![GKE or Cloud Run](image-7.png)
