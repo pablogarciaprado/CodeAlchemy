@@ -32,6 +32,7 @@ Feel free to explore the different sections and make use of the resources provid
     - [Streamline App Development with Gemini Code Assist](content/google_cloud/streamline_app_development_with_gemini_code_assist/)
     - [Developing Containerized Applications](content/google_cloud/developing_containerized_applications/)
         - [Introduction to Containers](content/google_cloud/developing_containerized_applications/introduction_to_containers/introduction_to_containers.md)
+        - [Introduction to Cloud Run and GKE](content/google_cloud/developing_containerized_applications/introduction_to_cloud_run_and_gke/introduction_to_cloud_run_and_gke.md)
     - [Tips](content/google_cloud/tips/)
         - [Commands](content/google_cloud/tips/commands.md)
         - [Concepts](content/google_cloud/tips/concepts.md)

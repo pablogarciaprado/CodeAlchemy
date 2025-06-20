@@ -106,6 +106,35 @@ The two elements of a prompt: the preamble and the input.
 3. Adopt a persona for your input. Adding a persona for the model can provide meaningful context to help it focus on related questions, which can help improve accuracy.
 4. It’s a recommended practice to keep each sentence concise. Longer sentences can sometimes produce suboptimal results.
 
+## Proxy
+A proxy is an intermediary that acts on behalf of something else. The meaning varies slightly by context:
+
+### Networking
+A proxy server sits between a user and the internet. It forwards requests and responses between them.
+
+Uses:
+- Hide user IP (anonymity)
+- Control access (e.g., firewalls, parental filters)
+- Improve performance (caching)
+- Monitor or log traffic
+
+### General Use
+A proxy is someone or something authorized to act for another.
+
+- Example: A proxy voter casts a vote on someone else's behalf.
+
+### Programming:
+A proxy object is a placeholder or interface that controls access to another object.
+
+Use cases:
+- Lazy loading
+- Access control
+- Logging or monitoring interactions
+- Remote object interaction (e.g., RPC)
+
+### AI or Data Science:
+A proxy variable is an indirect measure used when the actual variable isn't available or measurable.
+
 ## Unit Tests
 
 A **unit test** is a type of software testing that focuses on verifying the correctness of individual units or components of a program. A “unit” typically refers to the smallest piece of code that can be tested in isolation, such as a function, method, or class.

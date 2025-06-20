@@ -43,6 +43,71 @@ const add = function(a, b) {
     return a + b;
 };
 ```
+## `async` functions
+The purpose of defining a JavaScript async function is to **enable the use of await inside the function to handle asynchronous operations** (like API calls or file reads) **in a cleaner, more readable way** compared to traditional `.then()` chains. It **returns a Promise**, allowing asynchronous code to look and behave more like synchronous code.
+
+> Asynchronous operations are tasks that run in the background without blocking the main program flow. This lets other code run while waiting for something to finish. Because these operations take time, running them asynchronously prevents the app from freezing or waiting idly.
+> Common examples:
+>- Fetching data from an API (`fetch()`)
+>- Reading files (in Node.js)
+>- Timers (`setTimeout`)
+>- Database queries
+
+### `await`
+The purpose of **`await`** in JavaScript is to pause the execution of an `async` function until a Promise resolves or rejects.
+- Makes asynchronous code look synchronous
+- Improves readability and error handling
+- Eliminates complex `.then()` chains
+
+> When we say **await pauses the execution**, we mean: **JavaScript temporarily stops running the rest of the code inside the async function at that await line—until the Promise is resolved (or rejected).** But, it **does not block the whole program — only that function pauses**. Other tasks can keep running.
+
+Example:
+```js
+async function greet() {
+  console.log("Start");
+  await new Promise(resolve => setTimeout(resolve, 2000)); // wait 2 seconds
+  console.log("End");
+}
+
+greet();
+console.log("This runs while waiting");
+```
+Output:
+```
+Start
+This runs while waiting
+...2 seconds later...
+End
+```
+
+### Promise
+A Promise in JavaScript is an object that represents the eventual result (or failure) of an asynchronous operation. The possible states of a Promise are:
+1. Pending – operation is ongoing
+2. Fulfilled – operation completed successfully
+3. Rejected – operation failed
+
+```js
+let promise = fetch('/api/data'); // returns a Promise
+
+promise
+  .then(response => response.json())   // runs on success
+  .catch(error => console.error(error)); // runs on failure
+
+```
+
+They make it easier to handle async code and avoid callback hell. With async/await, Promises become even more readable:
+```js
+async function getData() {
+  try {
+    const response = await fetch('/api/data');
+    const data = await response.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+```
+> In short: A Promise is a placeholder for a value you’ll have later.
 
 ## Modularity
 
@@ -276,3 +341,47 @@ button.addEventListener('click', () => {
     console.log(this); // Inherited from parent scope
 });
 ```
+
+# `Node.js`
+## `Express.js`
+Tool used in Node.js to build web servers. It shows how to handle requests when someone visits a website or sends data to it. Flask is often considered the Python equivalent of Express.js.
+
+| Feature    | Flask (Python)             | Express.js (JavaScript)    |
+| ---------- | -------------------------- | -------------------------- |
+| Language   | Python                     | JavaScript (Node.js)       |
+| Type       | Micro web framework        | Minimalist web framework   |
+| Routing    | `@app.route("/")`          | `router.get("/")`          |
+| Middleware | Extensions or decorators   | Middleware functions       |
+| Templating | Jinja2                     | Any (e.g. EJS, Pug, etc.)  |
+| Use case   | Lightweight APIs, web apps | Same — REST APIs, web apps |
+
+### router.get() – For Reading (or displaying) Data
+Used when the client (like a browser) wants to get data from your server. Common for:
+- Loading a web page
+- Fetching JSON (e.g. /posts, /products)
+
+Example:
+```js
+// This runs when someone visits your site’s home page (/). It sends back the index page.
+router.get("/", (req, res) => {
+  res.render("index");
+});
+```
+### router.post() – For Sending (or saving) Data
+Used when the client wants to send data to the server (e.g. form submissions). Common for:
+- Creating new data (like a new user)
+- Sending chat messages
+- Uploading files
+
+Example:
+```js
+// This runs when something sends data to /chat, like a chat form submission.
+router.post("/chat", handleChat);
+```
+
+### What is (req, res)?
+These are just the parameters passed to your handler functions by Express:
+- req (short for request) – Info about what the client sent:
+    - URL, parameters, query strings, body data, headers
+- res (short for response) – How you send something back:
+    - HTML page, JSON, status code, etc.
