@@ -81,6 +81,83 @@ CD extends CI by automating the process of deploying code to production or other
 
 4.	**Increased Collaboration**: Teams integrate and share changes more frequently.
 
+## Computer Infrastructure
+### Memory (RAM) – "Short-term brain"
+Fast storage used to hold data that programs are currently using. Measured in: GB (gigabytes) or GiB (gibibytes, a binary version).
+
+> More memory = more or bigger apps can run at once without slowing down.
+
+### CPU (Processor) – "Worker speed & count"
+The part that actually executes instructions. 
+
+> Measured in cores: More cores = more things it can do at the same time. Clock speed (GHz) tells you how fast each core is, but core count is often the first concern.
+
+| Use Case                | Memory    | CPU Cores |
+| ----------------------- | --------- | --------- |
+| Light web browsing      | 4–8 GiB   | 2         |
+| Coding + light tools    | 8–16 GiB  | 2–4       |
+| Video editing / VMs     | 16–32 GiB | 4–8       |
+| Medium web server (API) | 8–32 GiB  | 2–8       |
+| Big data / ML workloads | 64+ GiB   | 16+       |
+
+## Data Storage Units
+### GB vs GiB
+The difference between GB (gigabytes) and GiB (gibibytes) is in how the size is calculated—decimal vs binary.
+
+| Unit      | Value (in bytes)    | Based on          |
+| --------- | ------------------- | ----------------- |
+| **1 GB**  | 1,000,000,000 bytes | Decimal (base 10) |
+| **1 GiB** | 1,073,741,824 bytes | Binary (base 2)   |
+
+- Operating systems (like Linux, cloud platforms) often use GiB (binary).
+- Hardware vendors (like SSD or RAM manufacturers) usually use GB (decimal).
+
+> Easy rule of thumb: **GiB is slightly bigger than GB when referring to the same number**.
+
+## Modern Web Communication and Networking Protocols
+
+### Network protocols (TCP, HTTP/2)
+#### TCP
+The TCP protocol (Transmission Control Protocol) is a core internet protocol that ensures reliable, ordered, and error-checked data delivery between devices.
+
+#### HTTP/2
+HTTP/2 is an improved version of the HTTP protocol that makes web communication faster and more efficient by:
+- Allowing multiple requests and responses at the same time (multiplexing)
+- Compressing headers to reduce data size
+- Prioritizing important resources
+
+It speeds up loading websites and reduces latency.
+
+### Security (HTTPS, TLS certificates)
+A TLS certificate is a digital file that enables secure, encrypted communication over HTTPS. It proves a website’s identity and ensures data is private and trusted between the user and the server. Without it, browsers show "Not Secure" warnings.
+
+### Communication patterns (HTTP requests, WebSockets, gRPC)
+#### HTTP requests
+HTTP requests are messages sent by a client (like a browser) to a server to ask for data or perform an action.
+
+#### WebSockets
+WebSockets are a communication protocol that allows a persistent, two-way connection between a client and server. Unlike regular HTTP (which is one request, one response), WebSockets let both sides send and receive data in real time — great for chats, games, or live updates.
+
+#### gRPC
+gRPC is a fast, open-source framework for remote procedure calls that lets different systems communicate efficiently using:
+- HTTP/2 for transport
+- Protocol Buffers for compact data serialization
+
+It’s great for connecting microservices with low latency and strong typing.
+
+### Infrastructure concepts
+#### Endpoints
+A reliable HTTPS endpoint is a secure web address (URL) that:
+ - Uses HTTPS (encrypted, trusted connection)
+ - Is consistently available (high uptime)
+ - Can handle incoming requests without errors or downtime
+
+#### Ports
+A TCP port is a numbered endpoint used by a computer to identify specific services or applications when communicating over the internet using the TCP protocol. 
+
+#### VPC Network
+A VPC (Virtual Private Cloud) network is a private, isolated virtual network within a cloud provider where you can securely run your resources (like virtual machines or containers). It lets you control IP addresses, subnets, routing, and firewall rules—just like a traditional private network but in the cloud.
+
 ## Prompting
 A prompt is a specific instruction, question, or cue given to a computer. In other words, it is the text that you feed to the model. Prompt engineering is a way of articulating your prompts to get the best response from the model. The better structured a prompt is, the better the output from the model will be.
 

@@ -33,7 +33,10 @@ In programming, a runtime (or runtime environment) refers to the software and sy
 For example, Python code isn't compiled into a standalone binary like in Go or C. Instead, it requires the Python interpreter (which is the runtime) to be installed on the system. This interpreter reads and executes the Python code line-by-line at runtime. In contrast, languages like Go or C compile directly into a native binary, which includes everything it needs to run. Once compiled, they don’t need a separate runtime environment.
 
 #### Serverless Computing
-Serverless computing on Google Cloud lets you develop and deploy highly scalable applications on a fully managed serverless platform. Services are automatically scaled up and down depending on traffic.
+Serverless computing on Google Cloud lets you develop and deploy highly scalable applications on a fully managed serverless platform. Services are automatically scaled up and down depending on traffic. A stateful app, in contrast, might remember your previous searches, login status, or user preferences.
+
+#### Stateless Applications
+Stateless applications are apps that don’t store any data or session information between requests. Every request is treated independently — like it's the first one.
 
 ### Files
 #### `Dockerfile`
