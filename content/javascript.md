@@ -19,6 +19,38 @@ With spread operator (creates a copy):
 this.originalData = [...data]; // Creates a new array with copied values
 ```
 
+It's also useful for creating a shallow copy of all properties from an existing object at the top level of a new object. Here's an example:
+```js
+// Example of what formFields might look like
+const formFields = {
+    minResolution: "1920x1080",
+    codecs: "h264",
+    extensions: "mp4"
+}
+
+const video = {
+    size: 15000000
+}
+
+// When you do this:
+const videoFormFields = {
+    ...formFields,    // Spreads all formFields properties
+    fileSize: video.size  // Adds new property
+}
+
+// The result is a flat object like this:
+// videoFormFields = {
+//     minResolution: "1920x1080",
+//     codecs: "h264",
+//     extensions: "mp4",
+//     fileSize: 15000000
+// }
+```
+- The spread operator ... unpacks all properties from formFields
+- The fileSize property is added as a new top-level property
+- It doesn't nest or create sub-objects
+- If formFields had a fileSize property, this would override it
+
 ## Arrow Functions
 
 Provide a shorter syntax compared to regular functions, and they also have some important differences in behavior, particularly with how they handle the `this` keyword. The `=>` syntax in JavaScript is used to define **arrow functions**.
