@@ -114,4 +114,32 @@ Tails (continuously streams) logs for the most recent version of the `default` A
 To stop the gcloud app logs tail command from tailing logs, simply press:
 ```bash
 Ctrl + C
-````
+```
+
+### Deploy to Cloud Run
+
+```
+docker stop cap-asset-check-container
+docker rm cap-asset-check-container
+
+docker build \
+  --platform linux/amd64 \
+  --no-cache \
+  -t eu.gcr.io/locaria-dev-asset-qc/cap-asset-check .
+
+gcloud config set project locaria-dev-asset-qc
+
+docker tag cap-asset-check eu.gcr.io/locaria-dev-asset-qc/cap-asset-check
+docker push eu.gcr.io/locaria-dev-asset-qc/cap-asset-check
+
+gcloud run deploy cap-asset-check \
+  --image eu.gcr.io/locaria-dev-asset-qc/cap-asset-check \
+  --platform managed \
+  --region europe-west1 \
+  --port 8080 \
+
+gcloud run services update-traffic cap-asset-check \
+    --to-latest \
+    --region europe-west1 \
+    --platform managed
+```
