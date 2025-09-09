@@ -11,6 +11,7 @@
 - [`&&`](#&&)
 - [`$_`](#$_)
 - [`cat`](#cat)
+- [`chmod`](#chmod)
 - [Conditional Blocks](#conditional-blocks)
 - [`cp`](#cp)
 - [`curl`](#curl)
@@ -113,6 +114,31 @@ cat file1.txt >> file2.txt
 cat -n filename.txt
 ```
 > *Displays filename.txt with line numbers.*
+
+## `chmod`
+Linux command used to change file permissions (read, write, execute).
+
+Basic syntax:
+```bash
+chmod [who][+/-][permission] file
+```
+- who → Whose permission to change:
+    - u = user (owner)
+    - g = group
+    - o = others
+    - a = all
+- + / - / = → Add, remove, or set permission.
+- permission
+    - r = read
+    - w = write
+    - x = execute
+
+Examples:
+```bash
+chmod u+x script.sh   # Give owner execute permission
+chmod g-w file.txt    # Remove write permission for group
+chmod a+r notes.txt   # Allow everyone to read
+```
 
 ## Conditional Blocks
 

@@ -30,7 +30,7 @@ Feel free to explore the different sections and make use of the resources provid
         - [Securing Cloud Run Functions](content/google_cloud/developing_applications_with_cloud_run_functions/securing_cloud_run_functions/securing_cloud_run_functions.md)
         - [Integrating with Cloud Databases](content/google_cloud/developing_applications_with_cloud_run_functions/integrating_with_cloud_databases/integrating_with_cloud_databases.md)
         - [Best Practices for Functions](content/google_cloud/developing_applications_with_cloud_run_functions/best_practices_for_functions/best_practices_for_functions.md)
-    - [Streamline App Development with Gemini Code Assist](content/google_cloud/streamline_app_development_with_gemini_code_assist/)
+    <!-- - [Streamline App Development with Gemini Code Assist](content/google_cloud/streamline_app_development_with_gemini_code_assist/) -->
     - [Developing Containerized Applications](content/google_cloud/developing_containerized_applications/)
         - [Introduction to Containers](content/google_cloud/developing_containerized_applications/introduction_to_containers/introduction_to_containers.md)
         - [Introduction to Cloud Run and GKE](content/google_cloud/developing_containerized_applications/introduction_to_cloud_run_and_gke/introduction_to_cloud_run_and_gke.md)
