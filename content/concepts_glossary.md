@@ -175,6 +175,15 @@ The difference between GB (gigabytes) and GiB (gibibytes) is in how the size is 
 
 > Easy rule of thumb: **GiB is slightly bigger than GB when referring to the same number**.
 
+## DNS (Domain Name System)
+DNS is like the phone book of the internet.
+- Websites have IP addresses (like 142.250.190.78 for Google).
+- Instead of remembering numbers, we use domain names (like google.com).
+- A DNS server translates the domain name you type into the correct IP address so your device can connect to the right server.
+
+Example:
+You type www.youtube.com → DNS translates it → Your device connects to the actual IP address of YouTube’s servers.
+
 ## Modern Web Communication and Networking Protocols
 
 ### Network protocols (TCP, HTTP/2)
@@ -250,11 +259,16 @@ A proxy is an intermediary that acts on behalf of something else. The meaning va
 ### Networking
 A proxy server sits between a user and the internet. It forwards requests and responses between them.
 
+- When you visit a website, instead of connecting directly, your request goes through the proxy server first.
+- The proxy then fetches the website for you and sends it back.
+
 Uses:
 - Hide user IP (anonymity)
 - Control access (e.g., firewalls, parental filters)
 - Improve performance (caching)
 - Monitor or log traffic
+
+> Think of it like giving your letter to a trusted friend, who then delivers it to the post office instead of you sending it directly.
 
 ### General Use
 A proxy is someone or something authorized to act for another.
