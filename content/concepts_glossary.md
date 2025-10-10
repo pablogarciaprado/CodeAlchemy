@@ -75,6 +75,8 @@ API keys are secret tokens that usually come in the form of an encrypted string.
 
 In Google Cloud terms, API keys identify the calling project making the call to an API. By identifying the calling project, API keys enable usage information to be associated with that project, and they can reject calls from projects that haven't been granted access or enabled by the API.
 
+> An API key is less likely to be logged or saved in browser history if it is specified in a header.
+
 ### OAuth
 OAuth tokens are similar to API keys in their format, but they are more secure and can be linked to user accounts or identities. These tokens are used primarily when APIs give a developer the means to access user data.
 
@@ -160,6 +162,17 @@ The part that actually executes instructions.
 | Video editing / VMs     | 16–32 GiB | 4–8       |
 | Medium web server (API) | 8–32 GiB  | 2–8       |
 | Big data / ML workloads | 64+ GiB   | 16+       |
+
+## CORS (cross-origin resource sharing)
+CORS is a protocol that uses HTTP headers to indicate to browsers whether it is safe to access restricted resources from a separate domain. By default, cross-domain requests are forbidden by the same-origin security policy. 
+
+> The same-origin policy protects browser users from unknowingly sharing session information with bad actors. The same-origin policy means that a web page served from `www.example.com` could not, by default, make a call to APIs at `api.example.com` because the host name is different. CORS can be used to allow this kind of cross-origin access.
+
+CORS also uses preflight requests. 
+
+> A preflight request is a special kind of HTTP request that the browser automatically sends before the actual request, to check whether it’s safe to send the real request across origins.
+
+The browser sends a preflight request using the OPTIONS verb to find out whether the next call will be allowed.
 
 ## Data Storage Units
 ### GB vs GiB
