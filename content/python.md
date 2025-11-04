@@ -104,63 +104,16 @@ unique_dicts = {k: v for d in value for k, v in d.items()}
 `{k: v for ...}`: This creates a new dictionary where: Each key `k` is taken from the nested loop. Each value `v` is taken from the nested loop.
 If multiple dictionaries have the same key, the last one encountered in `value` will overwrite the previous one
 
-## `Flask` library
-### Blueprint
-A Flask Blueprint is a way to organize and structure a Flask application by grouping related routes, views, and other logic. It helps break a large application into smaller, modular components, making it easier to manage and maintain.
-- Structuring large applications by separating concerns (e.g., authentication, API routes, admin panel).
-- Reusing code across multiple applications.
-- Keeping routes and logic modular and maintainable.
+## Keywords
+### `yield`
+Very powerful and memory-efficient technique, especially for an application that handles large video files.
 
-```py
-from flask import Blueprint
+In Python, when you use the `yield` keyword in a function, you're not creating a regular function; you're creating a **generator function**.
 
-# Create a Blueprint instance
-auth_bp = Blueprint('auth', __name__)
+Here's the difference between a regular function and a generator function:
 
-@auth_bp.route('/login')
-def login():
-    return "Login Page"
-
-@auth_bp.route('/logout')
-def logout():
-    return "Logout Page"
-
-# Register the Blueprint in the main app
-from flask import Flask
-app = Flask(__name__)
-app.register_blueprint(auth_bp, url_prefix='/auth')
-
-if __name__ == '__main__':
-    app.run()
-```
-
-## Google Sheets API Setup
-### 1. Install the required libraries
-```bash
-pip install gspread google-auth
-```
-
-### 2. Authenticate with your service account and open the Google Sheet
-```python
-import gspread
-from google.oauth2.service_account import Credentials
-
-# Define the scope
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-
-# Path to your service account JSON key
-json_keyfile_path = "/Users/your_name/your_repo_name/you_auth_folder/your-service-account.json"
-
-# Authenticate using service account credentials
-credentials = Credentials.from_service_account_file(json_keyfile_path, scopes=scope)
-client = gspread.authorize(credentials)
-
-# Open the Google Spreadsheet by key
-spreadsheet = client.open_by_key("your_spreadsheet_key")
-
-# Select the first worksheet by its ID
-worksheet = spreadsheet.get_worksheet_by_id(0)
-```
+- A regular function runs from start to finish and then returns a single value (or nothing). It computes everything at once.
+- A generator function doesn't run all at once. It returns a special iterator called a generator. When you loop over this generator, the function's code executes only until it hits a yield statement. It then "yields" (sends back) a value and pauses its execution, saving its state (all its local variables). When you ask for the next item, it resumes right where it left off. Think of it like a "pause and resume" button for your function.
 
 ## Leaked semaphore objects
 ```bash
@@ -195,7 +148,66 @@ except Exception:
     print(traceback.format_exc())
 ```
 
-## `requests` library
+## Libraries
+### `flask`
+#### Blueprint
+A Flask Blueprint is a way to organize and structure a Flask application by grouping related routes, views, and other logic. It helps break a large application into smaller, modular components, making it easier to manage and maintain.
+- Structuring large applications by separating concerns (e.g., authentication, API routes, admin panel).
+- Reusing code across multiple applications.
+- Keeping routes and logic modular and maintainable.
+
+```py
+from flask import Blueprint
+
+# Create a Blueprint instance
+auth_bp = Blueprint('auth', __name__)
+
+@auth_bp.route('/login')
+def login():
+    return "Login Page"
+
+@auth_bp.route('/logout')
+def logout():
+    return "Logout Page"
+
+# Register the Blueprint in the main app
+from flask import Flask
+app = Flask(__name__)
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
+if __name__ == '__main__':
+    app.run()
+```
+
+### Google Sheets API - Setup
+#### 1. Install the required libraries
+```bash
+pip install gspread google-auth
+```
+
+#### 2. Authenticate with your service account and open the Google Sheet
+```python
+import gspread
+from google.oauth2.service_account import Credentials
+
+# Define the scope
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+# Path to your service account JSON key
+json_keyfile_path = "/Users/your_name/your_repo_name/you_auth_folder/your-service-account.json"
+
+# Authenticate using service account credentials
+credentials = Credentials.from_service_account_file(json_keyfile_path, scopes=scope)
+client = gspread.authorize(credentials)
+
+# Open the Google Spreadsheet by key
+spreadsheet = client.open_by_key("your_spreadsheet_key")
+
+# Select the first worksheet by its ID
+worksheet = spreadsheet.get_worksheet_by_id(0)
+```
+
+### `requests` 
 `requests.get()` is used to send an HTTP GET request to a specified URL and retrieve the response.
 
 ```py
@@ -217,7 +229,7 @@ print(response.json())       # Parse JSON response (if applicable)
     - json() → Parses JSON response if the content is JSON.
     - headers → Response headers.
 
-### `params`
+#### `params`
 You can pass query parameters using the params argument. Used to send data in the URL's query string. Commonly used in API requests to filter or modify responses and sent as key-value pairs.
 > Use Cases: Pagination, filtering, search queries, API authentication (sometimes).
 ```py
@@ -231,7 +243,7 @@ response = requests.get(url, params=params)
 print(response.url)  # Shows: https://api.example.com/items?page=2&limit=10
 ```
 
-### `headers`
+#### `headers`
 Used to send additional metadata with the request. Typically includes authentication tokens, content types, and custom headers.
 > Use Cases: Authentication, setting content types (JSON, XML), customizing requests.
 ```py
