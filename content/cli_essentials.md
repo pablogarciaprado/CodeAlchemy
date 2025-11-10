@@ -18,6 +18,7 @@
 - [`echo`](#echo)
 - [`export`](#export)
 - [Flags](#flags)
+- [`grep`](#grep)
 - [`htop`](#htop)
 - [`kill`](#kill)
 - [`ln`](#ln)
@@ -25,6 +26,7 @@
 - [`mv`](#mv)
 - [`nano`](#nano)
 - [`ping`](#ping)
+- [`rm`](#rm)
 - [`touch`](#touch)
 - [`unzip`](#unzip)
 
@@ -76,19 +78,23 @@ mkdir my_folder && cd $_
 The `cat` command in Unix-based systems (like macOS and Linux) is used to concatenate and display the contents of files. It is mostly used to quickly view or combine files.
 
 ### Common Uses
+
 1. View a file’s contents
+
 ```bash
 cat filename.txt
 ```
 > *Prints the content of filename.txt to the terminal.*
 
 2. Concatenate multiple files
+
 ```bash
 cat file1.txt file2.txt > combined.txt
 ```
 > *Merges file1.txt and file2.txt into combined.txt.*
 
 3. Create a new file
+
 ```bash
 cat > newfile.txt
 ```
@@ -289,7 +295,50 @@ When to use it?
     - If using a single-user setup without a virtual environment.
 > Using virtual environments (venv or conda) is usually preferred over --user for better package management.
 
+## `grep`
+
+Searches for patterns in text.
+
+```bash
+grep -r "pattern" [directory]
+```
+
+### Useful Options
+
+#### `-r` (or `--recursive`) → means search in all files in the current directory and all subdirectories
+
+```bash
+grep -r "pattern" [directory]
+```
+
+#### `-i` → ignore case
+
+```bash
+grep -ri "error" .
+```
+
+#### `-n` → show line numbers
+
+```bash
+grep -rn "main()" src/
+```
+
+#### `--color=auto` → highlight matches (often on by default)
+
+#### `--include` → only search specific file types
+
+```bash
+grep -r "import" --include="*.py" .
+```
+
+#### `--exclude-dir` → skip certain directories
+
+```bash
+grep -r "password" . --exclude-dir={.git,node_modules}
+```
+
 ## `htop`
+
 The htop command is an interactive process viewer for Unix-based systems. It allows users to monitor system resources (CPU, memory, etc.) and manage processes in real time, with features like sorting, filtering, and killing processes directly from the interface.
 ```bash
 htop
@@ -348,7 +397,8 @@ ln -s ~/training-data-analyst/courses/orchestration-and-choreography/lab1 ~/code
 - `~/training-data-analyst/courses/orchestration-and-choreography/lab1` → The target directory you want to link to.
 - `~/code` → The name/location of the symbolic link being created.
 
-## `mkdir` (Make Directory)
+## `mkdir`
+
 Command used to create new directories (folders) in a filesystem.
 
 ```bash
@@ -417,6 +467,17 @@ ping -c 5 google.com
 > - Reply from [IP address]: The destination is reachable.
 > - time: Round-trip time in milliseconds (ms).
 > - TTL (Time to Live): Number of hops the packet made.
+
+## `rm`
+
+Used to delete files or directories.
+
+### Useful Options
+
+- `-r` → recursive (tells `rm` to delete directories and their contents, including all subdirectories and files)
+- `-f` → force (tells `rm` to ignore nonexistent files and not prompt for confirmation, even if files are write-protected)
+
+> `rm -rf [path]` means “delete everything inside this path, no questions asked.”
 
 ## `touch`
 Creates an empty file or updates the timestamp of an existing file.
