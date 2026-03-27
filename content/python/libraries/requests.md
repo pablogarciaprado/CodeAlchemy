@@ -1,4 +1,6 @@
 
+◀️ [Home](../../../README.md)
+
 ## `requests`
 `requests.get()` is used to send an HTTP GET request to a specified URL and retrieve the response.
 
