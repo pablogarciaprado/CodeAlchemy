@@ -144,13 +144,40 @@ CD extends CI by automating the process of deploying code to production or other
 
 4.	**Increased Collaboration**: Teams integrate and share changes more frequently.
 
+## Cron vs Airflow
+
+### Core difference
+
+- **Cron** is a scheduler.
+- **Airflow** is a workflow orchestrator.
+
+In other words:
+
+- Cron -> "Run script A at 2am"
+- Airflow -> "Run A -> then B -> then C, retry B if it fails, alert me if C fails, and show me everything in a UI"
+
+### Current assessment
+
+Right now, the current setup is more than enough because:
+
+- The vast majority of scheduled pipelines are independent.
+- Pipelines have a clear structure (modular functions and config-driven runs).
+- Logging is clear.
+- Monitoring and alerting are in place.
+- Retries and error handling are implemented.
+
+Airflow gives you reliability, observability, and control as pipelines grow in complexity, so it makes sense to consider migrating when the pain is clear.
+
 ## Computer Infrastructure
+
 ### Memory (RAM) – "Short-term brain"
+
 Fast storage used to hold data that programs are currently using. Measured in: GB (gigabytes) or GiB (gibibytes, a binary version).
 
 > More memory = more or bigger apps can run at once without slowing down.
 
 ### CPU (Processor) – "Worker speed & count"
+
 The part that actually executes instructions. 
 
 > Measured in cores: More cores = more things it can do at the same time. Clock speed (GHz) tells you how fast each core is, but core count is often the first concern.
