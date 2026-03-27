@@ -8,7 +8,9 @@ FastAPI is a modern Python web framework for building APIs quickly with:
 
 ---
 
-## 1) Minimal app
+## Basic concepts
+
+### 1) Minimal app
 
 ```python
 from fastapi import FastAPI
@@ -33,7 +35,7 @@ Docs:
 
 ---
 
-## 2) Path params, query params, and validation
+### 2) Path params, query params, and validation
 
 ```python
 from fastapi import FastAPI, Query
@@ -50,7 +52,7 @@ def get_item(item_id: int, q: str | None = Query(default=None, min_length=2)):
 
 ---
 
-## 3) Request body with Pydantic
+### 3) Request body with Pydantic
 
 ```python
 from pydantic import BaseModel
@@ -72,7 +74,7 @@ FastAPI validates JSON input and returns clear errors automatically.
 
 ---
 
-## 4) Async vs sync endpoints
+### 4) Async vs sync endpoints
 
 ```python
 @app.get("/sync")
@@ -89,7 +91,7 @@ async def async_handler():
 
 ---
 
-## 5) Dependency Injection (`Depends`)
+### 5) Dependency Injection (`Depends`)
 
 ```python
 from fastapi import Depends, FastAPI, Header, HTTPException
@@ -110,7 +112,7 @@ def protected_route(token: str = Depends(verify_token)):
 
 ---
 
-## 6) Lifespan events (startup + shutdown)
+### 6) Lifespan events (startup + shutdown)
 
 ```python
 from contextlib import asynccontextmanager
@@ -138,7 +140,7 @@ If no shutdown logic is needed, you can leave the post-`yield` section empty.
 
 ---
 
-## 7) Response models
+### 7) Response models
 
 ```python
 from pydantic import BaseModel
@@ -159,7 +161,7 @@ def get_user(user_id: int):
 
 ---
 
-## 8) Error handling
+### 8) Error handling
 
 ```python
 from fastapi import HTTPException
@@ -175,7 +177,7 @@ Use `HTTPException` for clear client-facing errors.
 
 ---
 
-## 9) Project structure (simple and scalable)
+### 9) Project structure (simple and scalable)
 
 ```text
 app/
@@ -193,7 +195,7 @@ Split routes, schemas, and business logic early to keep code maintainable.
 
 ---
 
-## 10) FastAPI essentials checklist
+### 10) FastAPI essentials checklist
 
 - Type everything (params, bodies, return models)
 - Prefer `response_model` for output safety
