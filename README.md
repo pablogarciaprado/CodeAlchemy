@@ -8,6 +8,9 @@ Feel free to explore the different sections and make use of the resources provid
 
 ## Table of Contents
 
+- Artifitial Intelligence
+  - [Knowledge Graphs](content/ai/knowledge_graphs.md)
+  - [GraphRAG](content/ai/graphrag/graphrag.md)
 - [CLI Essentials](content/cli_essentials.md)
 - [Concepts Glossary](content/concepts_glossary.md)
 - [CSS](content/css.md)
