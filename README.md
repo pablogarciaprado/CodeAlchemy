@@ -46,7 +46,6 @@ Feel free to explore the different sections and make use of the resources provid
 - [JavaScript](content/javascript.md)
 - [Markdown Guide](content/markdown_guide.md)
 - Python
-  - [class](content/python/class.md)
   - [Control Flow Statements](content/python/control_flow_statements.md)
   - [Dictionary comprehension](content/python/dictionary_comprehension.md)
   - [keywords](content/python/keywords.md)
@@ -56,9 +55,12 @@ Feel free to explore the different sections and make use of the resources provid
     - Web
       - [fastapi](content/python/frameworks/web/fastapi.md)
       - [flask](content/python/frameworks/web/flask.md)
-    - libraries
-      - [gspread](content/python/libraries/gspread.md)
-      - [requests](content/python/libraries/requests.md)
+  - libraries
+    - [gspread](content/python/libraries/gspread.md)
+    - [requests](content/python/libraries/requests.md)
+  - Object Oriented Programming
+    - [`class`](content/python/oop/class.md)
+    - [`dataclass`](content/python/oop/dataclass.md)
 - [Virtual Environments](content/virtual_environments.md)
 - [Visual Studio Code Tips](content/vscode/vscode_tips.md)
 - Web
