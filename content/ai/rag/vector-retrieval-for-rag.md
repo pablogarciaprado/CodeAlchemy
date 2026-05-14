@@ -1,10 +1,16 @@
-# Vectors
+# Vector retrieval for RAG
+
+◀️ [Home](../../../README.md)
+
+Retrieval is the step that decides which passages the model will see. In semantic RAG, you turn text into **embeddings** (fixed-length vectors) and ask a **vector index** to return the nearest neighbors to the query embedding—fast enough to run on every request, even when the corpus is large.
+
+That pipeline sounds simple, but the details matter: embedding **dimension** constrains storage and quality; **search algorithms** decide how you approximate nearest-neighbor search; **distance metrics** define what “near” means; **index/query consistency** and **metadata filtering** keep results trustworthy and correctly scoped; **re-ranking** can refine the final ordering; and **efficiency** choices (truncated dimensions, normalization) affect both cost and accuracy. The sections below walk through those pieces in the order you usually reason about them when designing or tuning a system.
+
+## Size
 
 In a RAG system, the vector dimension should match the output dimension of the embedding model you use. There’s no universally “correct” size — the important rule is: **All vectors in the same index must have the same dimensionality**.
 
 > In vector databases, an index is the data structure that lets you search embeddings efficiently.
-
-## Size
 
 Think of dimensions as the number of "coordinates" used to describe the meaning of a piece of text. More dimensions can capture more nuance, but they also require more storage and computational power.
 
@@ -128,9 +134,54 @@ When you query your vector database:
 
 1. The Search Algorithm (e.g., HNSW) quickly narrows down the 1,000,000 vectors to a "neighborhood" of perhaps 100 likely candidates.
 
-1. The Distance Metric (e.g., Cosine Similarity) is then used to precisely rank those 100 candidates to give you the final Top 5 results.
+2. The Distance Metric (e.g., Cosine Similarity) is then used to precisely rank those 100 candidates to give you the final Top 5 results.
 
 > You choose a Distance Metric based on your embedding model, and you choose a Search Algorithm based on how much data you have and how fast you need your RAG system to be.
+
+## Index and query consistency
+
+For scores and rankings to mean anything, **documents at index time** and **queries at search time** must go through the **same embedding pipeline**.
+
+Checklist:
+
+- **Same model and version** — Swapping the model or a materially different checkpoint usually means **re-embedding the whole corpus** (or running separate indexes per model version).
+- **Same output dimension** — Must match what the index was built for; if you use MRL-style truncation, use the **same** truncated width for every stored vector and for every query.
+- **Same optional prefixes or prompts** — Many models expect different text wrappers for queries vs passages (for example `query: …` vs `passage: …`). Follow provider documentation exactly, and do not mix conventions between indexing and search.
+- **Same preprocessing** — Truncation limits, unicode normalization, pooling, and any batching quirks should match what you used when you built the index.
+- **Same normalization policy** — If you L2-normalize stored vectors, normalize query vectors the same way; if the model was trained for raw magnitudes and Euclidean geometry, keep them raw.
+
+> A common failure mode is **train/serve skew**: the corpus was embedded with one code path and queries with another. Retrieval still returns results, but **ordering is wrong** and debugging is slow because nothing throws a hard error.
+
+## Metadata filtering
+
+Chunks almost always carry **metadata** (tenant id, user id, product, language, validity dates, `doc_id`, source URL, and so on). **Filtering** restricts candidate vectors to rows that satisfy those predicates, so you do not surface another customer’s documents, the wrong locale, or revoked policy text.
+
+Two patterns:
+
+- **Pre-filtering** — Metadata predicates are applied **during** or **before** approximate nearest-neighbor search, so neighbors are drawn only from the allowed subset. Works well when filters are selective and the engine integrates filters with the ANN structure (graph, IVF lists, etc.).
+- **Post-filtering** — Retrieve **more** than `top_k` hits, drop anything that fails metadata checks, then keep the first `k` survivors. Easy to implement, but risky: if the top vector hits are almost all outside the filter, you return a **short or empty** list. Mitigations include **oversampling** (request several times `top_k` before filtering), tuning ANN parameters, or leaning on hybrid lexical paths when filters are very selective.
+
+> With **hybrid search**, apply filtering **consistently** on both the vector and lexical sides before you fuse ranks (for example with RRF), or you can bias one branch and starve the other.
+
+## Re-ranking
+
+The first retrieval stage optimizes for **speed and recall**: bi-encoder embeddings plus ANN (and optionally BM25 with fusion) return a **candidate set**, often on the order of tens to a few hundred chunks.
+
+> The name "Bi-Encoder" comes from the fact that the model processes two inputs (like the Query and the Passage) as two independent streams.
+
+**Re-ranking** adds a second stage: a model scores each `(query, chunk)` **pair** and **reorders** only that small list. It is too expensive to run across the full corpus, but cheap enough on a short list to improve **precision at the top**—what the generator actually reads. There are two different ways to solve the same problem:
+
+- **Cross-encoder** — A single Transformer sees the query and the passage **in one joint sequence** (with special separators). Self-attention can relate every query token to every passage token, and the model outputs one **relevance score** per pair. Nothing is precomputed for the corpus: each candidate needs its own forward pass, but those passes are still much smaller and more predictable than a full LLM call.
+
+- **LLM reranking** — You prompt a general-purpose LLM with the query and each candidate (or a batched list) and ask for a score, a rank, or a short justification you map to a score. You gain **flexibility** (rubrics, domain instructions, “prefer primary sources”), but you pay **higher latency and cost**, deal with **format reliability** (unless you use structured output), and behavior can be **less stable** across model versions than a dedicated reranker.
+
+In practice: **cross-encoders** (or API rerank endpoints backed by them) are the default when you need cheap, high-throughput rescoring; **LLM reranking** is for smaller candidate sets or when instructions and reasoning about the pair matter more than raw throughput.
+
+Tradeoffs:
+
+- **Latency and cost** — One or more extra model calls per query; batching, smaller rerankers, or async pipelines help.
+- **Context limits** — Rerankers cap input length; very long chunks may need truncation or a hierarchical approach.
+- **When it is optional** — Tiny corpora, very tight latency budgets, or when first-stage retrieval is already strong; otherwise re-ranking is a common production upgrade path.
 
 ## Thinking about efficiency
 
@@ -176,6 +227,6 @@ While normalization is standard, there are a few "gotchas" to keep in mind:
 
 1. **Loss of Magnitude Information**: In some rare models, the length of a vector actually carries semantic meaning (e.g., the "strength" or "confidence" of a concept). If you normalize, that information is permanently discarded. However, for 99% of RAG use cases involving modern LLM embeddings, this is not an issue.
 
-2. **Model Specificity**: The Golden Rule: You must check if your embedding model was trained to be used with normalized vectors.If a model was trained using Euclidean Distance ($L_2$), it expects the magnitudes to stay intact. If you normalize vectors for a model that wasn't designed for it, your retrieval accuracy will actually drop.
+2. **Model Specificity**: The Golden Rule: You must check if your embedding model was trained to be used with normalized vectors. If a model was trained using Euclidean Distance ($L_2$), it expects the magnitudes to stay intact. If you normalize vectors for a model that wasn't designed for it, your retrieval accuracy will actually drop.
 
 3. **Precision Errors**: If you have extremely small values in your vectors, dividing by a very small norm can lead to floating-point precision issues (though this is rare with standard 32-bit floats).
