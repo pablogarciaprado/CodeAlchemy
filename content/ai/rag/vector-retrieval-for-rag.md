@@ -76,7 +76,32 @@ To understand search algorithms, we first have to distinguish between how they l
 
 - Vector Search (Semantic): Uses algorithms like HNSW (Hierarchical Navigable Small Worlds) or IVF (Inverted File Index). It looks for mathematical proximity. It knows "feline" and "cat" are neighbors in vector space.
 
+### Reciprocal Rank Fusion (RRF)
+
 The most advanced RAG systems don't pick just one; they use a Hybrid Search algorithm. It runs a Keyword Search (BM25) and a Vector Search (HNSW) simultaneously, then combines the results using a technique called Reciprocal Rank Fusion (RRF). This ensures that if a user searches for a specific part number (exact match) OR a general concept (semantic), the algorithm finds both.
+
+#### What RRF does
+
+Let's imagine we are using a hybrid approach and we retrieve the best 4 matches for each search algorithm. We'd get two ordered lists (e.g. top 4 from vectors, top 4 from BM25). RRF turns each list into rank-based scores and adds them per chunk:
+
+$$
+\text{RRF}(d) = \sum_{r \in R} \frac{w_r}{k + \text{rank}_r(d) + 1}
+$$
+
+Let's assume $k$ is 60, and `rank` is 0-based, so each list contributes:
+
+`weight / (60 + rank + 1)`
+
+- Rank 0 (best hit): `1 / 61 ≈ 0.0164`
+- Rank 3 (4th): `1 / 64 ≈ 0.0156`
+
+Chunks that appear in both lists get two contributions and tend to rise; chunks only deep in one list get a small bump.
+
+#### Why the constant is 60
+
+The 60 is the usual constant from the original RRF paper (Cormack, Clarke, Büttcher). It’s not tuned per app, it’s a standard default.
+
+This value dampens the influence of very deep ranks. In other words, a chunk that only squeaks into one list at position 8–9 adds almost nothing (1/69), while a chunk at rank 0–2 in both lists stacks enough score to win.
 
 ## Distance Metrics
 
@@ -88,7 +113,9 @@ The distance metric is a mathematical formula. It defines the "ground truth" of 
 
 When calculating the similarity between vectors, you'll use a distance metric. The most common for RAG is **Cosine Similarity**, calculated as:
 
-$$\text{similarity} = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|}$$
+$$
+\text{similarity} = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|}
+$$
 
 > It focuses entirely on the angle between them rather than the distance between their points.
 >
