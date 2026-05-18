@@ -327,6 +327,10 @@ Use cases:
 ### AI or Data Science:
 A proxy variable is an indirect measure used when the actual variable isn't available or measurable.
 
+## Singleton
+
+A single shared instance of an object that the application keeps around and reuses.
+
 ## Unit Tests
 
 A **unit test** is a type of software testing that focuses on verifying the correctness of individual units or components of a program. A “unit” typically refers to the smallest piece of code that can be tested in isolation, such as a function, method, or class.
