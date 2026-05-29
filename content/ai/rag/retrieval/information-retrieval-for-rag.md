@@ -1,4 +1,4 @@
-# Vector retrieval for RAG
+# Information retrieval for RAG
 
 ◀️ [Home](../../../README.md)
 
@@ -209,6 +209,28 @@ Tradeoffs:
 - **Latency and cost** — One or more extra model calls per query; batching, smaller rerankers, or async pipelines help.
 - **Context limits** — Rerankers cap input length; very long chunks may need truncation or a hierarchical approach.
 - **When it is optional** — Tiny corpora, very tight latency budgets, or when first-stage retrieval is already strong; otherwise re-ranking is a common production upgrade path.
+
+### Cross-encoders
+
+Cross-encoders encode two texts simultaneously and then output a classification label.
+  
+> The cross-encoder reads raw text, not precomputed embeddings.
+
+Compared to bi-encoder-generated embeddings (which are independent of each other), cross-encoder embeddings are dependent on each other. This is why cross-encoders are better suited for classification, and their quality is higher: they can capture the relationship between the two sentences.
+
+Let’s say you have four sentences, and you need to compare all the possible pairs:
+
+- A bi-encoder would need to encode each sentence independently, so it would need to encode four sentences.
+
+- A cross-encoder would need to encode all the possible pairs, so it would need to encode six sentences (AB, AC, AD, BC, BD, CD).
+
+Cross-encoders are slower, but their quality is higher.
+
+They can be used for different tasks:
+
+- Passage retrieval (given a question and a passage, is the passage relevant to the question?)
+
+- Similar to what we did with bi-encoders, is to use cross-encoders for semantic similarity.
 
 ## Thinking about efficiency
 

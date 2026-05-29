@@ -8,9 +8,9 @@ Feel free to explore the different sections and make use of the resources provid
 
 ## Table of Contents
 
-- Artifitial Intelligence
+- Artificial Intelligence
   - RAG
-    - [Vector retrieval for RAG](content/ai/rag/vector-retrieval-for-rag.md)
+    - [Information retrieval for RAG](content/ai/rag/retrieval/information-retrieval-for-rag.md)
   - [Knowledge Graphs](content/ai/knowledge_graphs/knowledge_graphs.md)
   - [GraphRAG](content/ai/graphrag/graphrag.md)
 - [CLI Essentials](content/cli_essentials.md)
