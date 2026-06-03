@@ -63,6 +63,9 @@ Feel free to explore the different sections and make use of the resources provid
   - libraries
     - [gspread](content/python/libraries/gspread.md)
     - [requests](content/python/libraries/requests.md)
+  - Standard library
+    - [`from __future__ import annotations`](content/python/stdlib/future_annotations.md)
+    - [`functools.lru_cache`](content/python/stdlib/lru_cache.md)
   - Object Oriented Programming
     - [`class`](content/python/oop/class.md)
     - [`dataclass`](content/python/oop/dataclass.md)
